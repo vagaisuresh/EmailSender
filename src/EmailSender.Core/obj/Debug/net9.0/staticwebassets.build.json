@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "AitC+wyOpHUGnjH8hG8BbriVGNycf+aFGhOE0HXbUng=",
+  "Source": "EmailSender.Core",
+  "BasePath": "_content/EmailSender.Core",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
