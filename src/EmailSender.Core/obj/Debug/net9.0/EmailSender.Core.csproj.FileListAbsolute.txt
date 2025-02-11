@@ -27,3 +27,15 @@ E:\Projects\Research\Training\portfolio\EmailSender\src\EmailSender.Core\obj\Deb
 E:\Projects\Research\Training\portfolio\EmailSender\src\EmailSender.Core\obj\Debug\net9.0\EmailSender.Core.pdb
 E:\Projects\Research\Training\portfolio\EmailSender\src\EmailSender.Core\obj\Debug\net9.0\EmailSender.Core.genruntimeconfig.cache
 E:\Projects\Research\Training\portfolio\EmailSender\src\EmailSender.Core\obj\Debug\net9.0\ref\EmailSender.Core.dll
+E:\Projects\Research\Training\portfolio\EmailSender\src\EmailSender.Core\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.dll
+E:\Projects\Research\Training\portfolio\EmailSender\src\EmailSender.Core\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+E:\Projects\Research\Training\portfolio\EmailSender\src\EmailSender.Core\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
+E:\Projects\Research\Training\portfolio\EmailSender\src\EmailSender.Core\bin\Debug\net9.0\Microsoft.Extensions.Caching.Memory.dll
+E:\Projects\Research\Training\portfolio\EmailSender\src\EmailSender.Core\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
+E:\Projects\Research\Training\portfolio\EmailSender\src\EmailSender.Core\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+E:\Projects\Research\Training\portfolio\EmailSender\src\EmailSender.Core\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
+E:\Projects\Research\Training\portfolio\EmailSender\src\EmailSender.Core\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+E:\Projects\Research\Training\portfolio\EmailSender\src\EmailSender.Core\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+E:\Projects\Research\Training\portfolio\EmailSender\src\EmailSender.Core\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
+E:\Projects\Research\Training\portfolio\EmailSender\src\EmailSender.Core\obj\Debug\net9.0\EmailSender.Core.csproj.AssemblyReference.cache
+E:\Projects\Research\Training\portfolio\EmailSender\src\EmailSender.Core\obj\Debug\net9.0\EmailSen.33A1E920.Up2Date
