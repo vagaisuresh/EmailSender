@@ -1,6 +1,16 @@
+using EmailSender.Core.DIs;
+using EmailSender.Core.Mapping;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAutoMapper(typeof(ModelToDtoProfile), typeof(ModelToDtoProfile));
+builder.Services.RegisterSqlContext();
+builder.Services.RegisterCoreServices();
+
+builder.Services.AddControllers();
+
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
+app.MapControllers();
 
 app.Run();

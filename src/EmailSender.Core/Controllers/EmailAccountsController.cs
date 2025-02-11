@@ -1,4 +1,7 @@
-using EmailSender.Core.Interfaces;
+using AutoMapper;
+using EmailSender.Core.Application.DTOs;
+using EmailSender.Core.Application.Interfaces;
+using EmailSender.Core.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmailSender.Core.Controllers;
@@ -8,9 +11,12 @@ namespace EmailSender.Core.Controllers;
 public class EmailAccountsController : ControllerBase
 {
     private readonly IEmailAccountService _service;
-    public EmailAccountsController(IEmailAccountService service)
+    private readonly IMapper _mapper;
+
+    public EmailAccountsController(IEmailAccountService service, IMapper mapper)
     {
         _service = service;
+        _mapper = mapper;
     }
 
     [HttpGet]
@@ -23,7 +29,9 @@ public class EmailAccountsController : ControllerBase
             if (emailAccounts == null || !emailAccounts.Any())
                 return NoContent();
             
-            return Ok(emailAccounts);
+            var emailAccountDtos = _mapper.Map<IEnumerable<EmailAccount>, IEnumerable<EmailAccountDto>>(emailAccounts);
+
+            return Ok(emailAccountDtos);
         }
         catch (Exception ex)
         {
@@ -40,11 +48,13 @@ public class EmailAccountsController : ControllerBase
         try
         {
             var emailAccount = await _service.GetEmailAccountByIdAsync(id);
-
+            
             if (emailAccount == null)
                 return NotFound();
             
-            return Ok(emailAccount);
+            var emailAccountDto = _mapper.Map<EmailAccountDto>(emailAccount);
+
+            return Ok(emailAccountDto);
         }
         catch (Exception ex)
         {
