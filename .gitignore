@@ -1,0 +1,12 @@
+# Ignore bin and obj directories
+bin/
+obj/
+
+# Other common .NET ignore patterns
+*.user
+*.userosscache
+*.suo
+*.userprefs
+.idea/
+.vs/
+ 
