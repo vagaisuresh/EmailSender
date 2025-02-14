@@ -5,8 +5,9 @@ namespace EmailSender.Core.DIs;
 
 public static class ServiceRegistrations
 {
-    public static void RegisterSqlContext(this IServiceCollection services)
+    public static void RegisterSqlContext(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<AppDbContext>(Options => Options.UseSqlServer("connectionString"));
+        var connectionString = configuration.GetConnectionString("ConnectionStrings:DefaultConnection");
+        services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
     }
 }

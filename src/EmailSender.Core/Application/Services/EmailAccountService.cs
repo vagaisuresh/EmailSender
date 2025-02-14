@@ -22,4 +22,19 @@ public class EmailAccountService : IEmailAccountService
     {
         return await _repository.GetEmailAccountByIdAsync(id);
     }
+
+    public Task<EmailAccount> CreateEmailAccountAsync(EmailAccount account)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<EmailAccount> UpdateEmailAccountAsync(short id, EmailAccount account)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<EmailAccount> DeleteEmailAccountAsync(short id)
+    {
+        throw new NotImplementedException();
+    }
 }

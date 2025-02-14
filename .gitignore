@@ -10,3 +10,6 @@ obj/
 .idea/
 .vs/
  
+# Windows-specific files
+Thumbs.db
+Desktop.ini
