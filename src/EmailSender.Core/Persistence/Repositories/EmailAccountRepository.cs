@@ -21,10 +21,7 @@ public class EmailAccountRepository : RepositoryBase, IEmailAccountRepository
 
     public async Task<EmailAccount?> GetEmailAccountByIdAsync(short id)
     {
-        //return await _context.EmailAccounts.FindAsync(id) ?? new EmailAccount();
-
-        var emailAccount = await _context.EmailAccounts.FindAsync(id);
-        return emailAccount; // ?? throw new KeyNotFoundException($"EmailAccount with ID {id} not found.");
+        return await _context.EmailAccounts.FindAsync(id);
     }
 
     public async Task AddAsync(EmailAccount emailAccount)

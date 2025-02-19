@@ -18,7 +18,7 @@ public class EmailAccountService : IEmailAccountService
         return await _repository.GetEmailAccountsAsync();
     }
 
-    public async Task<EmailAccount> GetEmailAccountByIdAsync(short id)
+    public async Task<EmailAccount?> GetEmailAccountByIdAsync(short id)
     {
         return await _repository.GetEmailAccountByIdAsync(id);
     }
