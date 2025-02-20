@@ -10,4 +10,6 @@ public class AppDbContext : DbContext
     }
 
     public DbSet<EmailAccount> EmailAccounts{ get; set; }
+    public DbSet<ContactGroupMaster> ContactGroupMasters { get; set; }
+    public DbSet<ContactMaster> ContactMasters { get; set; }
 }

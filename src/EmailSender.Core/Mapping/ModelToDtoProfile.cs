@@ -9,5 +9,8 @@ public class ModelToDtoProfile : Profile
     public ModelToDtoProfile()
     {
         CreateMap<EmailAccount, EmailAccountDto>();
+
+        CreateMap<ContactGroupMaster, ContactGroupDto>();
+        CreateMap<ContactMaster, ContactMasterDto>();
     }
 }
