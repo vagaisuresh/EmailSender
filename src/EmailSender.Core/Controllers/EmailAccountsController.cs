@@ -39,7 +39,7 @@ public class EmailAccountsController : ControllerBase
         }
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id}", Name = "GetEmailAccount")]
     public async Task<IActionResult> GetEmailAccountAsync(short id)
     {
         if (id == 0)
@@ -55,6 +55,66 @@ public class EmailAccountsController : ControllerBase
             var emailAccountDto = _mapper.Map<EmailAccountDto>(emailAccount);
 
             return Ok(emailAccountDto);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> PostEmailAccountAsync([FromBody] EmailAccountSaveDto emailAccountSaveDto)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest("Invalid model received.");
+        
+        try
+        {
+            var emailAccount = _mapper.Map<EmailAccountSaveDto, EmailAccount>(emailAccountSaveDto);
+            var savedEmailAccount = await _service.CreateEmailAccountAsync(emailAccount);
+
+            if (savedEmailAccount == null)
+                return NotFound();
+
+            var emailAccountDto = _mapper.Map<EmailAccount, EmailAccountDto>(savedEmailAccount);
+
+            return CreatedAtRoute("GetEmailAccount", new { emailAccountDto.Id }, emailAccountDto);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
+        }
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutEmailAccountAsync([FromRoute] short id, [FromBody] EmailAccountSaveDto emailAccountSaveDto)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest("Invalid model received.");
+
+        try
+        {
+            var emailAccount = _mapper.Map<EmailAccount>(emailAccountSaveDto);
+            await _service.UpdateEmailAccountAsync(id, emailAccount);
+
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
+        }
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteEmailAccountAsync([FromRoute] short id)
+    {
+        if (id == 0)
+            return BadRequest("Invalid id received.");
+        
+        try
+        {
+            await _service.DeleteEmailAccountAsync(id);
+            return NoContent();
         }
         catch (Exception ex)
         {
