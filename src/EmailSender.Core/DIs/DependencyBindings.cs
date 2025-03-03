@@ -13,5 +13,8 @@ public static class DependencyBindings
 
         services.AddScoped<IEmailAccountService, EmailAccountService>();
         services.AddScoped<IEmailAccountRepository, EmailAccountRepository>();
+
+        services.AddScoped<IContactGroupService, ContactGroupService>();
+        services.AddScoped<IContactGroupRepository, ContactGroupRepository>();
     }
 }
