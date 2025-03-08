@@ -7,22 +7,22 @@ public class UnitOfWork : IUnitOfWork
 {
     private readonly AppDbContext _context;
 
-    private IEmailAccountRepository _emailAccountRepository;
+    private IAccountRepository _accountRepository;
     private IContactGroupRepository _contactGroupRepository;
     private IContactRepository _contactRepository;
 
     public UnitOfWork(AppDbContext context, 
-        IEmailAccountRepository emailAccountRepository,
+        IAccountRepository accountRepository,
         IContactGroupRepository contactGroupRepository, 
         IContactRepository contactRepository)
     {
         _context = context;
-        _emailAccountRepository = emailAccountRepository;
+        _accountRepository = accountRepository;
         _contactGroupRepository = contactGroupRepository;
         _contactRepository = contactRepository;
     }
 
-    public IEmailAccountRepository EmailAccountRepository => _emailAccountRepository;
+    public IAccountRepository AccountRepository => _accountRepository;
     public IContactGroupRepository ContactGroupRepository => _contactGroupRepository;
     public IContactRepository ContactRepository => _contactRepository;
 

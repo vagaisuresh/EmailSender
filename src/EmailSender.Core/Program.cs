@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAutoMapper(typeof(ModelToDtoProfile), typeof(ModelToDtoProfile));
 builder.Services.RegisterSqlContext(builder.Configuration);
 builder.Services.RegisterCoreServices();
+builder.Services.RegisterLoggerService();
 
 builder.Services.AddControllers();
 

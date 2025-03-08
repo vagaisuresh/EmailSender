@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EmailSender.Core.Persistence.Repositories;
 
-public class EmailAccountRepository : RepositoryBase, IEmailAccountRepository
+public class AccountRepository : RepositoryBase, IAccountRepository
 {
-    public EmailAccountRepository(AppDbContext context) : base(context)
+    public AccountRepository(AppDbContext context) : base(context)
     {
     }
 
