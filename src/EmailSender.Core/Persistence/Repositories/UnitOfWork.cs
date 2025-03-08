@@ -9,18 +9,22 @@ public class UnitOfWork : IUnitOfWork
 
     private IEmailAccountRepository _emailAccountRepository;
     private IContactGroupRepository _contactGroupRepository;
+    private IContactRepository _contactRepository;
 
     public UnitOfWork(AppDbContext context, 
         IEmailAccountRepository emailAccountRepository,
-        IContactGroupRepository contactGroupRepository)
+        IContactGroupRepository contactGroupRepository, 
+        IContactRepository contactRepository)
     {
         _context = context;
         _emailAccountRepository = emailAccountRepository;
         _contactGroupRepository = contactGroupRepository;
+        _contactRepository = contactRepository;
     }
 
     public IEmailAccountRepository EmailAccountRepository => _emailAccountRepository;
     public IContactGroupRepository ContactGroupRepository => _contactGroupRepository;
+    public IContactRepository ContactRepository => _contactRepository;
 
     public async Task SaveAsync()
     {

@@ -16,5 +16,8 @@ public static class DependencyBindings
 
         services.AddScoped<IContactGroupService, ContactGroupService>();
         services.AddScoped<IContactGroupRepository, ContactGroupRepository>();
+
+        services.AddScoped<IContactService, ContactService>();
+        services.AddScoped<IContactRepository, ContactRepository>();
     }
 }
