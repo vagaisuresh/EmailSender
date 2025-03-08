@@ -2,7 +2,7 @@ using EmailSender.Core.Domain.Entities;
 
 namespace EmailSender.Core.Domain.Repositories;
 
-public interface IEmailAccountRepository
+public interface IAccountRepository
 {
     Task<IEnumerable<EmailAccount>> GetEmailAccountsAsync();
     Task<EmailAccount?> GetEmailAccountByIdAsync(short id);

@@ -9,15 +9,27 @@ public static class DependencyBindings
 {
     public static void RegisterCoreServices(this IServiceCollection services)
     {
-        services.AddScoped<IEmailService, SmtpEmailService>();
+        try
+        {
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
 
-        services.AddScoped<IEmailAccountService, EmailAccountService>();
-        services.AddScoped<IEmailAccountRepository, EmailAccountRepository>();
+            
+            services.AddScoped<IContactGroupService, ContactGroupService>();
+            services.AddScoped<IContactService, ContactService>();
+            services.AddScoped<IEmailService, SmtpEmailService>();
 
-        services.AddScoped<IContactGroupService, ContactGroupService>();
-        services.AddScoped<IContactGroupRepository, ContactGroupRepository>();
+            
 
-        services.AddScoped<IContactService, ContactService>();
-        services.AddScoped<IContactRepository, ContactRepository>();
+            
+            services.AddScoped<IContactGroupRepository, ContactGroupRepository>();
+            services.AddScoped<IContactRepository, ContactRepository>();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Error occurred during DI container configuration: {ex.Message}");
+        }
     }
 }

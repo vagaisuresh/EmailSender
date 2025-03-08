@@ -8,12 +8,12 @@ namespace EmailSender.Core.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class EmailAccountsController : ControllerBase
+public class AccountsController : ControllerBase
 {
-    private readonly IEmailAccountService _service;
+    private readonly IAccountService _service;
     private readonly IMapper _mapper;
 
-    public EmailAccountsController(IEmailAccountService service, IMapper mapper)
+    public AccountsController(IAccountService service, IMapper mapper)
     {
         _service = service;
         _mapper = mapper;
@@ -28,7 +28,7 @@ public class EmailAccountsController : ControllerBase
 
             if (emailAccounts == null || !emailAccounts.Any())
                 return NoContent();
-            
+
             var emailAccountDtos = _mapper.Map<IEnumerable<EmailAccount>, IEnumerable<EmailAccountDto>>(emailAccounts);
 
             return Ok(emailAccountDtos);
@@ -48,10 +48,10 @@ public class EmailAccountsController : ControllerBase
         try
         {
             var emailAccount = await _service.GetEmailAccountByIdAsync(id);
-            
+
             if (emailAccount == null)
                 return NotFound();
-            
+
             var emailAccountDto = _mapper.Map<EmailAccountDto>(emailAccount);
 
             return Ok(emailAccountDto);
@@ -67,7 +67,7 @@ public class EmailAccountsController : ControllerBase
     {
         if (!ModelState.IsValid)
             return BadRequest("Invalid model received.");
-        
+
         try
         {
             var emailAccount = _mapper.Map<EmailAccountSaveDto, EmailAccount>(emailAccountSaveDto);
@@ -110,7 +110,7 @@ public class EmailAccountsController : ControllerBase
     {
         if (id == 0)
             return BadRequest("Invalid id received.");
-        
+
         try
         {
             await _service.DeleteEmailAccountAsync(id);

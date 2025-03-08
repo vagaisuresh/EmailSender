@@ -2,7 +2,7 @@ namespace EmailSender.Core.Domain.Repositories;
 
 public interface IUnitOfWork : IDisposable
 {
-    IEmailAccountRepository EmailAccountRepository { get; }
+    IAccountRepository AccountRepository { get; }
     IContactGroupRepository ContactGroupRepository { get; }
     IContactRepository ContactRepository { get; }
 
