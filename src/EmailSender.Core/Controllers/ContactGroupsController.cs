@@ -12,11 +12,13 @@ public class ContactGroupsController : ControllerBase
 {
     private readonly IContactGroupService _service;
     private readonly IMapper _mapper;
+    private readonly ILoggerService _logger;
 
-    public ContactGroupsController(IContactGroupService service, IMapper mapper)
+    public ContactGroupsController(IContactGroupService service, IMapper mapper, ILoggerService logger)
     {
         _service = service;
         _mapper = mapper;
+        _logger = logger;
     }
 
     [HttpGet]
@@ -34,8 +36,8 @@ public class ContactGroupsController : ControllerBase
         }
         catch (Exception ex)
         {
-            // Log here
-            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
+            _logger.LogError($"An error occurred while getting contact groups in GetAllContactGroups method: {ex}");
+            return StatusCode(500, $"Internal server error. Please try again later.");
         }
     }
 
@@ -57,7 +59,8 @@ public class ContactGroupsController : ControllerBase
         }
         catch (Exception ex)
         {
-            return StatusCode(500, $"Internal server error. Please try again. {ex.Message}");
+            _logger.LogError($"An error occurred while getting contact group in GetContactGroupById method: {ex}");
+            return StatusCode(500, $"Internal server error. Please try again.");
         }
     }
 
@@ -81,7 +84,8 @@ public class ContactGroupsController : ControllerBase
         }
         catch (Exception ex)
         {
-            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
+            _logger.LogError($"An error occurred while saving contact group in PostContactGroupAsync method: {ex}");
+            return StatusCode(500, $"Internal server error. Please try again later.");
         }
     }
 
@@ -101,7 +105,8 @@ public class ContactGroupsController : ControllerBase
         }
         catch (Exception ex)
         {
-            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
+            _logger.LogError($"An error occurred while updating contact group in PutContactGroupAsync method: {ex}");
+            return StatusCode(500, $"Internal server error. Please try again later.");
         }
     }
 
@@ -118,7 +123,8 @@ public class ContactGroupsController : ControllerBase
         }
         catch (Exception ex)
         {
-            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
+            _logger.LogError($"An error occurred while deleting contact group in DeleteContactGroupAsync method: {ex}");
+            return StatusCode(500, $"Internal server error. Please try again later.");
         }
     }
 }

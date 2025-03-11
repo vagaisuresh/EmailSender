@@ -7,20 +7,38 @@ namespace EmailSender.Core.Application.Services;
 public class AccountService : IAccountService
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly ILoggerService _logger;
 
-    public AccountService(IUnitOfWork unitOfWork)
+    public AccountService(IUnitOfWork unitOfWork, ILoggerService logger)
     {
         _unitOfWork = unitOfWork;
+        _logger = logger;
     }
 
     public async Task<IEnumerable<EmailAccount>> GetEmailAccountsAsync()
     {
-        return await _unitOfWork.AccountRepository.GetEmailAccountsAsync();
+        try
+        {
+            return await _unitOfWork.AccountRepository.GetEmailAccountsAsync();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"An error occurred while getting email accounts in GetEmailAccountsAsync service method: {ex}");
+            throw new Exception($"An error occurred when getting the email account.");
+        }
     }
 
     public async Task<EmailAccount?> GetEmailAccountByIdAsync(short id)
     {
-        return await _unitOfWork.AccountRepository.GetEmailAccountByIdAsync(id);
+        try
+        {
+            return await _unitOfWork.AccountRepository.GetEmailAccountByIdAsync(id);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"An error occurred while getting email account in GetEmailAccountByIdAsync service method: {ex}");
+            throw new Exception($"An error occurred when getting the email account.");
+        }
     }
 
     public async Task<EmailAccount> CreateEmailAccountAsync(EmailAccount account)
@@ -29,12 +47,13 @@ public class AccountService : IAccountService
         {
             await _unitOfWork.AccountRepository.AddAsync(account);
             await _unitOfWork.SaveAsync();
-            
+
             return account;
         }
         catch (Exception ex)
         {
-            throw new Exception($"An error occurred when saving the email account: {ex.Message}");
+            _logger.LogError($"An error occurred while creating email account in CreateEmailAccountAsync service method: {ex}");
+            throw new Exception($"An error occurred when saving the email account.");
         }
     }
 
@@ -44,7 +63,7 @@ public class AccountService : IAccountService
 
         if (existingEmailAccount == null)
             throw new InvalidOperationException("Email account not found.");
-        
+
         existingEmailAccount.Name = account.Name;
         existingEmailAccount.EmailAddress = account.EmailAddress;
         existingEmailAccount.OutgoingServer = account.OutgoingServer;
@@ -62,7 +81,8 @@ public class AccountService : IAccountService
         }
         catch (Exception ex)
         {
-            throw new Exception($"An error occurred when updating the email account: {ex.Message}");
+            _logger.LogError($"An error occurred while updating email account in UpdateEmailAccountAsync (Id: {id}) service method: {ex}");
+            throw new Exception($"An error occurred when updating the email account.");
         }
     }
 
@@ -80,7 +100,8 @@ public class AccountService : IAccountService
         }
         catch (Exception ex)
         {
-            throw new Exception($"An error occurred when deleting the email account: {ex.Message}");
+            _logger.LogError($"An error occurred while deleting email account in DeleteEmailAccountAsync (Id: {id}) service method: {ex}");
+            throw new Exception($"An error occurred when deleting the email account.");
         }
     }
 }
