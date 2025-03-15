@@ -7,20 +7,38 @@ namespace EmailSender.Core.Application.Services;
 public class ContactService : IContactService
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly ILoggerService _logger;
 
-    public ContactService(IUnitOfWork unitOfWork)
+    public ContactService(IUnitOfWork unitOfWork, ILoggerService logger)
     {
         _unitOfWork = unitOfWork;
+        _logger = logger;
     }
 
     public async Task<IEnumerable<ContactMaster>> GetContactsAsync()
     {
-        return await _unitOfWork.ContactRepository.GetContactsAsync();
+        try
+        {
+            return await _unitOfWork.ContactRepository.GetContactsAsync();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"An error occurred while getting contacts in GetContactsAsync service method: {ex}");
+            throw new Exception("An error occurred while getting contact.");
+        }
     }
 
     public async Task<ContactMaster?> GetContactByIdAsync(int id)
     {
-        return await _unitOfWork.ContactRepository.GetContactByIdAsync(id);
+        try
+        {
+            return await _unitOfWork.ContactRepository.GetContactByIdAsync(id);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"An error occurred while getting the contact in GetContactByIdAsync service method: {ex}");
+            throw new Exception("An error occurred while getting contact.");
+        }
     }
 
     public async Task<ContactMaster> SaveContactAsync(ContactMaster contactMaster)
@@ -34,8 +52,8 @@ public class ContactService : IContactService
         }
         catch (Exception ex)
         {
-            // Log here
-            throw new ApplicationException($"An error occurred while creating the contact: {ex.Message}");
+            _logger.LogError($"An error occurred while creating contact in SaveContactAsync service method: {ex}");
+            throw new ApplicationException($"An error occurred while creating the contact.");
         }
     }
 
@@ -64,7 +82,8 @@ public class ContactService : IContactService
         }
         catch (ApplicationException ex)
         {
-            throw new ApplicationException($"An error occurred while updating the contact: {ex.Message}");
+            _logger.LogError($"An error occurred while updating contact in UpdateContactAsync service method: {ex}");
+            throw new ApplicationException($"An error occurred while updating the contact.");
         }
     }
 
@@ -82,7 +101,8 @@ public class ContactService : IContactService
         }
         catch (ApplicationException ex)
         {
-            throw new ApplicationException($"An error occurred while removing the contact: {ex.Message}");
+            _logger.LogError($"An error occurred while deleting contact in DeleteContactAsync service method: {ex}");
+            throw new ApplicationException($"An error occurred while removing the contact.");
         }
     }
 }

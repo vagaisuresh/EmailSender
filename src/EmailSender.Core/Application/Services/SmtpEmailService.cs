@@ -7,6 +7,13 @@ namespace EmailSender.Core.Application.Services;
 
 public class SmtpEmailService : IEmailService
 {
+    private readonly ILoggerService _logger;
+
+    public SmtpEmailService(ILoggerService logger)
+    {
+        _logger = logger;
+    }
+
     public async Task SendEmailAsync(SmtpMessage smtpMessage, EmailConfiguration config)
     {
         var mailMessage = await ComposeMessageAsync(smtpMessage);
@@ -64,7 +71,8 @@ public class SmtpEmailService : IEmailService
                 }
                 catch (Exception ex)
                 {
-                    throw new InvalidOperationException($"Error processing attachment: {ex.Message}");
+                    _logger.LogError($"An error occurred while processing the attachment in ComposeMessageAsync service method: {ex}");
+                    throw new InvalidOperationException("An error occurred while processing attachment.");
                 }
             }
         }
@@ -89,7 +97,8 @@ public class SmtpEmailService : IEmailService
             }
             catch (InvalidOperationException ex)
             {
-                throw new InvalidOperationException("Failed to send email.", ex);
+                _logger.LogError($"An error occurred while sending email in SendAsync service method: {ex}");
+                throw new InvalidOperationException("Failed to send email.");
             }
             finally
             {

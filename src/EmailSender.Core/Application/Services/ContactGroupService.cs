@@ -7,20 +7,38 @@ namespace EmailSender.Core.Application.Services;
 public class ContactGroupService : IContactGroupService
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly ILoggerService _logger;
 
-    public ContactGroupService(IUnitOfWork unitOfWork)
+    public ContactGroupService(IUnitOfWork unitOfWork, ILoggerService logger)
     {
         _unitOfWork = unitOfWork;
+        _logger = logger;
     }
     
     public async Task<IEnumerable<ContactGroupMaster>> GetContactGroupsAsync()
     {
-        return await _unitOfWork.ContactGroupRepository.GetContactGroupMastersAsync();
+        try
+        {
+            return await _unitOfWork.ContactGroupRepository.GetContactGroupMastersAsync();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"An error occurred while getting contact groups in GetContactGroupsAsync service method: {ex}");
+            throw new Exception("An error occurred while getting the contact groups.");
+        }
     }
 
     public async Task<ContactGroupMaster?> GetContactGroupsByIdAsync(int id)
     {
-        return await _unitOfWork.ContactGroupRepository.GetContactGroupMasterByIdAsync(id);
+        try
+        {
+            return await _unitOfWork.ContactGroupRepository.GetContactGroupMasterByIdAsync(id);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"An error occurred while getting contact group in GetContactGroupsByIdAsync service method: {ex}");
+            throw new Exception("An error occurred while getting the contact group.");
+        }
     }
 
     public async Task<ContactGroupMaster> CreateContactGroupAsync(ContactGroupMaster contactGroupMaster)
@@ -34,7 +52,8 @@ public class ContactGroupService : IContactGroupService
         }
         catch (Exception ex)
         {
-            throw new Exception($"An error occurred when saving the email account: {ex.Message}");
+            _logger.LogError($"An error occurred while creating contact group in CreateContactGroupAsync service method: {ex}");
+            throw new Exception($"An error occurred when saving the email account.");
         }
     }
 
@@ -56,7 +75,8 @@ public class ContactGroupService : IContactGroupService
         }
         catch (Exception ex)
         {
-            throw new Exception($"An error occurred while updating the contact group: {ex.Message}");
+            _logger.LogError($"An error occurred while updating contact group in UpdateContactGroupAsync service method: {ex}");
+            throw new Exception($"An error occurred while updating the contact group.");
         }
     }
 
@@ -74,7 +94,8 @@ public class ContactGroupService : IContactGroupService
         }
         catch (Exception ex)
         {
-            throw new Exception($"An error occurred while deleting the contact group: {ex.Message}");
+            _logger.LogError($"An error occurred while deleting contact group in DeleteContactGroupAsync service method: {ex}");
+            throw new Exception($"An error occurred while deleting the contact group.");
         }
     }
 }
