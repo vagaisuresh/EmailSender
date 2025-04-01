@@ -1,6 +1,8 @@
-namespace EmailSender.Core.Domain.Entities;
+using EmailSender.Core.Domain.Entities;
 
-public class MessageRecipient
+namespace EmailSender.Core.Application.DTOs;
+
+public class MessageRecipientDto
 {
     public int Id { get; set;}
     public int MessageId { get; set; }

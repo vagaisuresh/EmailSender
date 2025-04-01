@@ -20,4 +20,7 @@ public class Message
     public DateTime EmailedDateTime { get; set; }
 
     public EmailAccount? EmailAccountNavigation { get; set; }
+
+    public IEnumerable<MessageAttachment> MessageAttachments { get; set; } = null!;
+    public IEnumerable<MessageRecipient> MessageRecipients  { get; set; } = null!;
 }
