@@ -15,17 +15,16 @@ public static class DependencyBindings
             
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IAccountRepository, AccountRepository>();
-
             
             services.AddScoped<IContactGroupService, ContactGroupService>();
             services.AddScoped<IContactService, ContactService>();
             services.AddScoped<IEmailService, SmtpEmailService>();
-
-            
-
             
             services.AddScoped<IContactGroupRepository, ContactGroupRepository>();
             services.AddScoped<IContactRepository, ContactRepository>();
+
+            services.AddScoped<IMessageService, MessageService>();
+            services.AddScoped<IMessageRepository, MessageRepository>();
         }
         catch (Exception ex)
         {

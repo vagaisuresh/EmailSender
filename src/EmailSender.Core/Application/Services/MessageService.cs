@@ -28,11 +28,11 @@ public class MessageService : IMessageService
         }
     }
 
-    public async Task<Message> GetMessageAsync(int messageId)
+    public async Task<Message?> GetMessageAsync(int messageId)
     {
         try
         {
-            return await _unitOfWork.MessageRepository.GetMessageByIdAsync(messageId);
+            return await _unitOfWork.MessageRepository.GetMessageByIdWithDetailsAsync(messageId);
         }
         catch (Exception ex)
         {
