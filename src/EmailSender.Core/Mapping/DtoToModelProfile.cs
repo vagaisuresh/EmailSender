@@ -12,5 +12,9 @@ public class DtoToModelProfile : Profile
 
         CreateMap<ContactGroupSaveDto, ContactGroupMaster>();
         CreateMap<ContactMasterSaveDto, ContactMaster>();
+
+        CreateMap<MessageSaveDto, Message>();
+        CreateMap<MessageAttachmentSaveDto, MessageAttachment>();
+        CreateMap<MessageRecipientSaveDto, MessageRecipient>();
     }
 }
