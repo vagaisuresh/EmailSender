@@ -5,6 +5,7 @@ public interface IUnitOfWork : IDisposable
     IAccountRepository AccountRepository { get; }
     IContactGroupRepository ContactGroupRepository { get; }
     IContactRepository ContactRepository { get; }
+    IMessageRepository MessageRepository { get; }
 
     /// <summary>
     /// SaveAsync is used to commit changes to the database. It wraps the call to SaveChangesAsync on the database context.
