@@ -30,4 +30,19 @@ public class MessageRepository : RepositoryBase, IMessageRepository
             .Include(a => a.MessageRecipients)
             .FirstOrDefaultAsync(i => i.Id == id);
     }
+
+    public async Task AddAsync(Message message)
+    {
+        await _context.Messages.AddAsync(message);
+    }
+
+    public void Update(Message message)
+    {
+        _context.Messages.Update(message);
+    }
+
+    public void Remove(Message message)
+    {
+        _context.Messages.Remove(message);
+    }
 }

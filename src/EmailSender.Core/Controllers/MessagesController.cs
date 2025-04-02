@@ -41,9 +41,12 @@ public class MessagesController : ControllerBase
         }
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id}", Name = "GetMessage")]
     public async Task<IActionResult> GetMessageByIdAsync(int id)
     {
+        if (id == 0)
+            return BadRequest("Invalid ID provided.");
+        
         try
         {
             var message = await _service.GetMessageAsync(id);
@@ -57,6 +60,71 @@ public class MessagesController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while getting message in GetMessageByIdAsync method: {ex}");
+            return StatusCode(500, "Internal server error. Please try again later.");
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> PostMessageAsync([FromBody] MessageSaveDto messageSaveDto)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest("Invalid model data received.");
+        
+        try
+        {
+            var message = _mapper.Map<MessageSaveDto, Message>(messageSaveDto);
+            var savedMessage = await _service.CreateMessageAsync(message);
+
+            if (savedMessage == null)
+                return NotFound();
+            
+            var messageDto = _mapper.Map<Message, MessageDto>(savedMessage);
+            return CreatedAtRoute("GetMessage", new { id = savedMessage.Id }, messageDto);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"An error occurred while saving the message in PostMessageAsync method: {ex}");
+            return StatusCode(500, "Internal server error. Please try again later.");
+        }
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutMessageAsync(int id, [FromBody] MessageSaveDto messageSaveDto)
+    {
+        if (id == 0)
+            return BadRequest("Invalid ID provided.");
+
+        if (!ModelState.IsValid)
+            return BadRequest("Invalid model data received.");
+        
+        try
+        {
+            var message = _mapper.Map<MessageSaveDto, Message>(messageSaveDto);
+            await _service.UpdateMessageAsync(id, message);
+
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+             _logger.LogError($"An error occurred while updating the message in PutMessageAsync method: {ex}");
+            return StatusCode(500, "Internal server error. Please try again later.");
+        }
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteMessageAsync(int id)
+    {
+        if (id == 0)
+            return BadRequest("Invalid ID provided.");
+        
+        try
+        {
+            await _service.DeleteMessageAsync(id);
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+             _logger.LogError($"An error occurred while deleting the message in DeleteMessageAsync method: {ex}");
             return StatusCode(500, "Internal server error. Please try again later.");
         }
     }
