@@ -24,7 +24,7 @@ public class AccountService : IAccountService
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while getting email accounts in GetEmailAccountsAsync service method: {ex}");
-            throw new Exception($"An error occurred when getting the email account.");
+            throw new Exception("An error occurred when getting the email account.");
         }
     }
 
@@ -37,7 +37,7 @@ public class AccountService : IAccountService
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while getting email account in GetEmailAccountByIdAsync service method: {ex}");
-            throw new Exception($"An error occurred when getting the email account.");
+            throw new Exception("An error occurred when getting the email account.");
         }
     }
 
@@ -53,7 +53,7 @@ public class AccountService : IAccountService
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while creating email account in CreateEmailAccountAsync service method: {ex}");
-            throw new Exception($"An error occurred when saving the email account.");
+            throw new Exception("An error occurred when saving the email account.");
         }
     }
 
@@ -82,7 +82,7 @@ public class AccountService : IAccountService
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while updating email account in UpdateEmailAccountAsync (Id: {id}) service method: {ex}");
-            throw new Exception($"An error occurred when updating the email account.");
+            throw new Exception("An error occurred when updating the email account.");
         }
     }
 
@@ -101,7 +101,7 @@ public class AccountService : IAccountService
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while deleting email account in DeleteEmailAccountAsync (Id: {id}) service method: {ex}");
-            throw new Exception($"An error occurred when deleting the email account.");
+            throw new Exception("An error occurred when deleting the email account.");
         }
     }
 }
