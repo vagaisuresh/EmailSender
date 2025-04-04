@@ -57,7 +57,7 @@ public class MessageAttachmentsController : ControllerBase
                 return NotFound();
             
             var attachmentDto = _mapper.Map<MessageAttachment, MessageAttachmentDto>(savedAttachment);
-            return Ok(attachmentDto);
+            return CreatedAtRoute("PostMessageAttachment", new { id = attachmentDto.Id }, attachmentDto);
         }
         catch (Exception ex)
         {

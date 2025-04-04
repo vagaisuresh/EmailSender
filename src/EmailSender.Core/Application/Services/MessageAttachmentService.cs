@@ -15,23 +15,73 @@ public class MessageAttachmentService : IMessageAttachmentService
         _logger = logger;
     }
     
-    public Task<MessageAttachment> GetAttachmentByIdAsync(int attachmentId)
+    public async Task<MessageAttachment?> GetAttachmentByIdAsync(int attachmentId)
     {
-        throw new NotImplementedException();
+        try
+        {
+            return await _unitOfWork.MessageAttachmentRepository.GetAttachmentByIdAsync(attachmentId);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"An error occurred while getting the attachment in GetAttachmentByIdAsync service method: {ex}");
+            throw new Exception("An error occurred while getting attachment.");
+        }
     }
 
-    public Task<MessageAttachment> CreateAttachmentAsync(MessageAttachment attachment)
+    public async Task<MessageAttachment> CreateAttachmentAsync(MessageAttachment attachment)
     {
-        throw new NotImplementedException();
+        try
+        {
+            await _unitOfWork.MessageAttachmentRepository.AddAsync(attachment);
+            await _unitOfWork.SaveAsync();
+
+            return attachment;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"An error occurred while saving the attachment in CreateAttachmentAsync service method: {ex}");
+            throw new Exception("An error occurred while saving attachment.");
+        }
     }
 
-    public Task UpdateAttachmentAsync(int id, MessageAttachment attachment)
+    public async Task UpdateAttachmentAsync(int id, MessageAttachment attachment)
     {
-        throw new NotImplementedException();
+        var existingAttachment = await _unitOfWork.MessageAttachmentRepository.GetAttachmentByIdAsync(id);
+
+        if (existingAttachment == null)
+            throw new InvalidOperationException("Attachment not found.");
+
+        existingAttachment.MessageId = attachment.MessageId;
+        existingAttachment.Attachment = attachment.Attachment;
+
+        try
+        {
+            _unitOfWork.MessageAttachmentRepository.Update(existingAttachment);
+            await _unitOfWork.SaveAsync();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"An error occurred while updating the attachment in UpdateAttachmentAsync service method: {ex}");
+            throw new Exception("An error occurred while updating attachment.");
+        }
     }
 
-    public Task DeleteAttachmentAsync(int id)
+    public async Task DeleteAttachmentAsync(int id)
     {
-        throw new NotImplementedException();
+        var existingAttachment = await _unitOfWork.MessageAttachmentRepository.GetAttachmentByIdAsync(id);
+
+        if (existingAttachment == null)
+            throw new InvalidOperationException("Attachment not found.");
+
+        try
+        {
+            _unitOfWork.MessageAttachmentRepository.Remove(existingAttachment);
+            await _unitOfWork.SaveAsync();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"An error occurred while deleting the attachment in DeleteAttachmentAsync service method: {ex}");
+            throw new Exception("An error occurred while deleting attachment.");
+        }
     }
 }

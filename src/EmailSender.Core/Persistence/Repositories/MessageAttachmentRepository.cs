@@ -11,23 +11,23 @@ public class MessageAttachmentRepository : RepositoryBase, IMessageAttachmentRep
     {
     }
     
-    public Task<MessageAttachment> GetAttachmentByIdAsync(int id)
+    public async Task<MessageAttachment?> GetAttachmentByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _context.MessageAttachments.FindAsync(id);
     }
 
-    public Task AddAsync(MessageAttachment messageAttachment)
+    public async Task AddAsync(MessageAttachment messageAttachment)
     {
-        throw new NotImplementedException();
+        await _context.MessageAttachments.AddAsync(messageAttachment);
     }
 
     public void Update(MessageAttachment messageAttachment)
     {
-        throw new NotImplementedException();
+        _context.Update(messageAttachment);
     }
 
     public void Remove(MessageAttachment messageAttachment)
     {
-        throw new NotImplementedException();
+        _context.Remove(messageAttachment);
     }
 }
