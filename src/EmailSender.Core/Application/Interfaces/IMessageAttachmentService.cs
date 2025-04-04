@@ -4,7 +4,6 @@ namespace EmailSender.Core.Application.Interfaces;
 
 public interface IMessageAttachmentService
 {
-    Task<IEnumerable<MessageAttachment>> GetAttachmentsByMessageIdAsync();
     Task<MessageAttachment> GetAttachmentByIdAsync(int attachmentId);
     Task<MessageAttachment> CreateAttachmentAsync(MessageAttachment attachment);
     Task UpdateAttachmentAsync(int id, MessageAttachment attachment);

@@ -10,12 +10,7 @@ public class MessageAttachmentRepository : RepositoryBase, IMessageAttachmentRep
         : base(context)
     {
     }
-
-    public Task<IEnumerable<MessageAttachment>> GetAttachmentsByMessageIdAsync(int messageId)
-    {
-        throw new NotImplementedException();
-    }
-
+    
     public Task<MessageAttachment> GetAttachmentByIdAsync(int id)
     {
         throw new NotImplementedException();
@@ -30,7 +25,7 @@ public class MessageAttachmentRepository : RepositoryBase, IMessageAttachmentRep
     {
         throw new NotImplementedException();
     }
-    
+
     public void Remove(MessageAttachment messageAttachment)
     {
         throw new NotImplementedException();

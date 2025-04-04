@@ -14,12 +14,7 @@ public class MessageAttachmentService : IMessageAttachmentService
         _unitOfWork = unitOfWork;
         _logger = logger;
     }
-
-    public Task<IEnumerable<MessageAttachment>> GetAttachmentsByMessageIdAsync()
-    {
-        throw new NotImplementedException();
-    }
-
+    
     public Task<MessageAttachment> GetAttachmentByIdAsync(int attachmentId)
     {
         throw new NotImplementedException();
