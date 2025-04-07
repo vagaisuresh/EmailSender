@@ -12,13 +12,15 @@ public class UnitOfWork : IUnitOfWork
     private IContactRepository _contactRepository;
     private IMessageRepository _messageRepository;
     private IMessageAttachmentRepository _messageAttachmentRepository;
+    private IMessageRecipientRepository _messageRecipientRepository;
 
     public UnitOfWork(AppDbContext context, 
         IAccountRepository accountRepository,
         IContactGroupRepository contactGroupRepository, 
         IContactRepository contactRepository,
         IMessageRepository messageRepository,
-        IMessageAttachmentRepository messageAttachmentRepository)
+        IMessageAttachmentRepository messageAttachmentRepository,
+        IMessageRecipientRepository messageRecipientRepository)
     {
         _context = context;
         _accountRepository = accountRepository;
@@ -26,6 +28,7 @@ public class UnitOfWork : IUnitOfWork
         _contactRepository = contactRepository;
         _messageRepository = messageRepository;
         _messageAttachmentRepository = messageAttachmentRepository;
+        _messageRecipientRepository = messageRecipientRepository;
     }
 
     public IAccountRepository AccountRepository => _accountRepository;
@@ -33,6 +36,7 @@ public class UnitOfWork : IUnitOfWork
     public IContactRepository ContactRepository => _contactRepository;
     public IMessageRepository MessageRepository => _messageRepository;
     public IMessageAttachmentRepository MessageAttachmentRepository => _messageAttachmentRepository;
+    public IMessageRecipientRepository MessageRecipientRepository => _messageRecipientRepository;
 
     public async Task SaveAsync()
     {
