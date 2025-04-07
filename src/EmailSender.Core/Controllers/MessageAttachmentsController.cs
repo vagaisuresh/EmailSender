@@ -21,7 +21,7 @@ public class MessageAttachmentsController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet("{id}", Name = "PostMessageAttachment")]
+    [HttpGet("{id}", Name = "GetMessageAttachment")]
     public async Task<IActionResult> GetMessageAttachmentByIdAsync(int id)
     {
         try
@@ -57,7 +57,7 @@ public class MessageAttachmentsController : ControllerBase
                 return NotFound();
             
             var attachmentDto = _mapper.Map<MessageAttachment, MessageAttachmentDto>(savedAttachment);
-            return CreatedAtRoute("PostMessageAttachment", new { id = attachmentDto.Id }, attachmentDto);
+            return CreatedAtRoute("GetMessageAttachment", new { id = attachmentDto.Id }, attachmentDto);
         }
         catch (Exception ex)
         {

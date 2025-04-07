@@ -28,6 +28,9 @@ public static class DependencyBindings
 
             services.AddScoped<IMessageAttachmentService, MessageAttachmentService>();
             services.AddScoped<IMessageAttachmentRepository, MessageAttachmentRepository>();
+
+            services.AddScoped<IMessageRecipientService, MessageRecipientService>();
+            services.AddScoped<IMessageRecipientRepository, MessageRecipientRepository>();
         }
         catch (Exception ex)
         {
