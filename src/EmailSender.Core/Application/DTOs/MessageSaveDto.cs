@@ -41,4 +41,7 @@ public class MessageSaveDto
 
     [Required]
     public short EmailAccountId { get; set; }
+
+    public ICollection<MessageAttachmentSaveDto>? MessageAttachments { get; set; } = new List<MessageAttachmentSaveDto>();
+    public ICollection<MessageRecipientSaveDto>? MessageRecipients { get; set; } = new List<MessageRecipientSaveDto>();
 }

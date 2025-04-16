@@ -46,14 +46,14 @@ public class MessageService : IMessageService
         try
         {
             await _unitOfWork.MessageRepository.AddAsync(message);
-            await _unitOfWork.SaveAsync();
-
+            await _unitOfWork.SaveAsync();                          // EF will save message + attachments + recipients
+        
             return message;
         }
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while saving message in CreateMessageAsync service method: {ex}");
-            throw new Exception("An error occurred when saving message.");
+            throw new Exception("An error occurred when saving message.", ex);
         }
     }
 

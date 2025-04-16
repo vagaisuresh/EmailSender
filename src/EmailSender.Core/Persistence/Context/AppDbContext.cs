@@ -16,4 +16,21 @@ public class AppDbContext : DbContext
     public DbSet<Message> Messages { get; set; }
     public DbSet<MessageAttachment> MessageAttachments { get; set; }
     public DbSet<MessageRecipient> MessageRecipients { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Message>()
+            .HasMany(m => m.MessageAttachments)
+            .WithOne()
+            .HasForeignKey(a => a.MessageId)
+            .OnDelete(DeleteBehavior.Cascade);
+        
+        modelBuilder.Entity<Message>()
+            .HasMany(m => m.MessageRecipients)
+            .WithOne()
+            .HasForeignKey(a => a.MessageId)
+            .OnDelete(DeleteBehavior.Cascade);
+        
+        base.OnModelCreating(modelBuilder);
+    }
 }
