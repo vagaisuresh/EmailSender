@@ -21,6 +21,11 @@ public class MessageRecipientRepository : RepositoryBase, IMessageRecipientRepos
         await _context.MessageRecipients.AddAsync(messageRecipient);
     }
 
+    // public async Task AddRangeAsync(ICollection<MessageRecipient> messageRecipients)
+    // {
+    //     await _context.MessageRecipients.AddRangeAsync(messageRecipients);
+    // }
+
     public void Update(MessageRecipient messageRecipient)
     {
         _context.MessageRecipients.Update(messageRecipient);

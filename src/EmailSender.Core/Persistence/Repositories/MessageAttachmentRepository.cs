@@ -21,6 +21,11 @@ public class MessageAttachmentRepository : RepositoryBase, IMessageAttachmentRep
         await _context.MessageAttachments.AddAsync(messageAttachment);
     }
 
+    /* public async Task AddRangeAsync(ICollection<MessageAttachment> messageAttachments)
+    {
+        await _context.MessageAttachments.AddRangeAsync(messageAttachments);
+    } */
+
     public void Update(MessageAttachment messageAttachment)
     {
         _context.Update(messageAttachment);

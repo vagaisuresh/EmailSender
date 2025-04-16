@@ -22,4 +22,7 @@ public class MessageDto
     public DateTime EmailedDateTime { get; set; }
 
     public EmailAccount? EmailAccountNavigation { get; set; }
+
+    public IEnumerable<MessageAttachment> Attachments { get; set; } = null!;
+    public IEnumerable<MessageRecipient> Recipients { get; set; } = null!;
 }

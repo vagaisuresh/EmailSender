@@ -42,7 +42,7 @@ public class MessagesController : ControllerBase
     }
 
     [HttpGet("{id}", Name = "GetMessage")]
-    public async Task<IActionResult> GetMessageByIdAsync(int id)
+    public async Task<IActionResult> GetMessageWithDetailsAsync(int id)
     {
         if (id == 0)
             return BadRequest("Invalid ID provided.");
