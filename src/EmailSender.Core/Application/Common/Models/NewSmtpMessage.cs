@@ -1,6 +1,6 @@
-﻿namespace EmailSender.Core.Domain.Entities;
+namespace EmailSender.Core.Application.Common.Models;
 
-public class SmtpMessage
+public class NewSmtpMessage
 {
     public string? From { get; set; }
     public string? Name { get; set; }

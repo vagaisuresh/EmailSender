@@ -14,7 +14,9 @@ public class MessageRepository : RepositoryBase, IMessageRepository
 
     public async Task<IEnumerable<Message>> GetAllMessagesAsync()
     {
-        return await _context.Messages.ToListAsync();
+        return await _context.Messages
+            .AsNoTracking()
+            .ToListAsync();
     }
 
     public async Task<Message?> GetMessageByIdAsync(int id)

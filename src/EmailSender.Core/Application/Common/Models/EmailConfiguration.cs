@@ -1,4 +1,4 @@
-﻿namespace EmailSender.Core.Domain.Entities;
+namespace EmailSender.Core.Application.Common.Models;
 
 public class EmailConfiguration
 {
