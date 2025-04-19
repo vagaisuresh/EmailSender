@@ -14,7 +14,7 @@ public class NewSmtpMessage
 
     public IFormFileCollection? Attachments { get; set; }
 
-    public SmtpMessage(string from, string name, string? to, string cc, string bcc, string subject, string content, IFormFileCollection? attachments)
+    public NewSmtpMessage(string from, string name, string? to, string cc, string bcc, string subject, string content, IFormFileCollection? attachments)
     {
         From = from;
         Name = name;
