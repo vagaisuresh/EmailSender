@@ -5,8 +5,8 @@ public class EmailAccountDto
     public short Id { get; set; }
     public string? Name { get; set; }
     public string? EmailAddress { get; set; }
-    public string? OutgoingServer { get; set; }
-    public int OutgoingPortNumber { get; set; }
+    public string? SmtpServer { get; set; }
+    public int Port { get; set; }
     public bool RequiresAuthentication { get; set; }
     public byte EncryptedConnection { get; set; }
     public string? UserName { get; set; }

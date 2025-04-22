@@ -66,8 +66,8 @@ public class AccountService : IAccountService
 
         existingEmailAccount.Name = account.Name;
         existingEmailAccount.EmailAddress = account.EmailAddress;
-        existingEmailAccount.OutgoingServer = account.OutgoingServer;
-        existingEmailAccount.OutgoingPortNumber = account.OutgoingPortNumber;
+        existingEmailAccount.SmtpServer = account.SmtpServer;
+        existingEmailAccount.Port = account.Port;
         existingEmailAccount.RequiresAuthentication = account.RequiresAuthentication;
         existingEmailAccount.EncryptedConnection = account.EncryptedConnection;
         existingEmailAccount.UserName = account.UserName;
