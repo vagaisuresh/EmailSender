@@ -1,6 +1,7 @@
 using EmailSender.Core.Application.Interfaces;
 using EmailSender.Core.Application.Services;
 using EmailSender.Core.Domain.Repositories;
+using EmailSender.Core.Infrastructure.Services;
 using EmailSender.Core.Persistence.Repositories;
 
 namespace EmailSender.Core.DIs;
@@ -18,8 +19,11 @@ public static class DependencyBindings
             
             services.AddScoped<IContactGroupService, ContactGroupService>();
             services.AddScoped<IContactService, ContactService>();
-            services.AddScoped<IEmailService, SmtpEmailService>();
-            
+
+            services.AddScoped<IEmailSenderMailKitService, MailKitEmailSender>();
+            services.AddScoped<IEmailSenderNetMailService, NetMailEmailSender>();
+            services.AddScoped<IBulkEmailService, BulkEmailService>();
+
             services.AddScoped<IContactGroupRepository, ContactGroupRepository>();
             services.AddScoped<IContactRepository, ContactRepository>();
 
