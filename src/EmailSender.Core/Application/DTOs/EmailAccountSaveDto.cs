@@ -14,10 +14,10 @@ public class EmailAccountSaveDto
 
     [Required]
     [StringLength(100)]
-    public string? OutgoingServer { get; set; }
+    public string? SmtpServer { get; set; }
 
     [Required]
-    public int OutgoingPortNumber { get; set; }
+    public int Port { get; set; }
 
     [Required]
     public bool RequiresAuthentication { get; set; }
