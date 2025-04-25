@@ -20,12 +20,13 @@ public class EmailController : ControllerBase
     {
         try
         {
-            await _bulkEmailService.SendBulkEmailsAsync(bulkEmailRequest.Name, 
-                bulkEmailRequest.FromAddress, 
-                bulkEmailRequest.Recipients, 
-                bulkEmailRequest.Subject, 
-                bulkEmailRequest.HtmlBody);
-                
+            // await _bulkEmailService.SendBulkEmailsAsync(bulkEmailRequest.Name, 
+            //     bulkEmailRequest.FromAddress, 
+            //     bulkEmailRequest.Recipients, 
+            //     bulkEmailRequest.Subject, 
+            //     bulkEmailRequest.HtmlBody);
+            
+            await _bulkEmailService.SendBulkEmailsAsync(bulkEmailRequest.MessageId);
             return Ok("Bulk email process started.");
         }
         catch (Exception ex)

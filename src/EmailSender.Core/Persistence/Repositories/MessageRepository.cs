@@ -30,6 +30,7 @@ public class MessageRepository : RepositoryBase, IMessageRepository
             .Include(a => a.EmailAccountNavigation)
             .Include(a => a.MessageAttachments)
             .Include(a => a.MessageRecipients)
+            .ThenInclude(a => a.ContactMasterNavigation)
             .FirstOrDefaultAsync(i => i.Id == id);
     }
 

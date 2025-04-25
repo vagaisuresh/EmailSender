@@ -32,7 +32,7 @@ public class MailKitEmailSender : IEmailSenderMailKitService
 
         mimeMessage.Subject = newMessage.Subject;
         mimeMessage.Body = new BodyBuilder { HtmlBody = newMessage.HtmlBody }.ToMessageBody();
-
+        
         return mimeMessage;
     }
 

@@ -17,6 +17,8 @@ public class AppDbContext : DbContext
     public DbSet<MessageAttachment> MessageAttachments { get; set; }
     public DbSet<MessageRecipient> MessageRecipients { get; set; }
 
+    public DbSet<EmailLog> EmailLogs { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Message>()

@@ -27,5 +27,5 @@ public class Message
     // EF Core doesn’t track changes to IEnumerable<T> — it needs a mutable collection, like ICollection<T> or List<T>
     
     public ICollection<MessageAttachment>? MessageAttachments { get; set; } = new List<MessageAttachment>();
-    public ICollection<MessageRecipient>? MessageRecipients { get; set; } = new List<MessageRecipient>();
+    public ICollection<MessageRecipient> MessageRecipients { get; set; } = new List<MessageRecipient>();
 }

@@ -15,16 +15,25 @@ public class BulkEmailService : IBulkEmailService
         _unitOfWork = unitOfWork;
     }
 
-    public async Task SendBulkEmailsAsync(string name, string from, List<string> recipients, string subject, string htmlBody)
+    public async Task SendBulkEmailsAsync(int messageId) //string name, string from, List<string> recipients, string subject, string htmlBody)
     {
-        foreach (var recipient in recipients)
+        var message = await _unitOfWork.MessageRepository.GetMessageByIdWithDetailsAsync(messageId);
+
+        if (message == null)
+            throw new InvalidOperationException("Message not found.");
+        
+        foreach (var recipient in message.MessageRecipients)
         {
+            if (recipient.ContactMasterNavigation == null || recipient.ContactMasterNavigation.EmailAddress == null)
+                continue;
+
             try
             {
-                var newMessage = new NewMessage(name, from, 
-                    new string[] { recipient }, 
+                var newMessage = new NewMessage(message.FromAddress, message.Name, 
+                    new string[] { recipient.ContactMasterNavigation.EmailAddress }, 
                     new string[] {}, 
-                    new string[] {}, subject, htmlBody);
+                    new string[] {}, 
+                    message.Subject, message.Content);
 
                 var emailConfig = new EmailConfiguration();
 
