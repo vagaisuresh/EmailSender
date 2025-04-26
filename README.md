@@ -1,7 +1,7 @@
 
 
 
-# 📧 Bulk Email Sender in ASP.NET Core Web API 9.0 and Blazor
+# 📧 Bulk Email Sender in ASP.NET Core and Blazor
 
 A full-stack Bulk Email Sender application built with **ASP.NET Core Web API** and **Blazor** front-end, implementing **Clean Architecture** principles for scalability, maintainability, and separation of concerns. This system enables efficient bulk email management and delivery using robust tools like **MailKit**, **MimeKit**, and **Entity Framework Core**.
 
@@ -37,9 +37,9 @@ A full-stack Bulk Email Sender application built with **ASP.NET Core Web API** a
 ```
 /src
 │
-├── /BlazorUI                  → Blazor Front-End (WASM or Server)
+├── /BlazorUI                  → Blazor Front-End (WASM)
 │
-└── /BulkEmailSender           → Backend & Core Layers
+└── /EmailSender.Core          → Backend & Core Layers
     ├── /API                   → ASP.NET Core Web API (Presentation Layer)
     ├── /Application           → Application Logic (Use Cases, DTOs, Interfaces)
     ├── /Domain                → Domain Models & Core Entities
