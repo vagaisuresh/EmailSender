@@ -1,4 +1,4 @@
-
+> ⚠️ **Warning**: This repository is still under development. Features may change or break without notice.
 
 
 # 📧 Bulk Email Sender in ASP.NET Core and Blazor
