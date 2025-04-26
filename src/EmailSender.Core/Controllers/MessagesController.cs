@@ -37,7 +37,7 @@ public class MessagesController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while getting messages in GetMessagesAsync method: {ex}");
-            return StatusCode(500, "Internal server error. Please try again later.");
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
         }
     }
 
@@ -60,7 +60,7 @@ public class MessagesController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while getting message in GetMessageByIdAsync method: {ex}");
-            return StatusCode(500, "Internal server error. Please try again later.");
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
         }
     }
 
@@ -84,7 +84,7 @@ public class MessagesController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while saving the message in PostMessageAsync method: {ex}");
-            return StatusCode(500, "Internal server error. Please try again later.");
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
         }
     }
 
@@ -107,7 +107,7 @@ public class MessagesController : ControllerBase
         catch (Exception ex)
         {
              _logger.LogError($"An error occurred while updating the message in PutMessageAsync method: {ex}");
-            return StatusCode(500, "Internal server error. Please try again later.");
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
         }
     }
 
@@ -125,7 +125,7 @@ public class MessagesController : ControllerBase
         catch (Exception ex)
         {
              _logger.LogError($"An error occurred while deleting the message in DeleteMessageAsync method: {ex}");
-            return StatusCode(500, "Internal server error. Please try again later.");
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
         }
     }
 }

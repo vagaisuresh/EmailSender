@@ -38,7 +38,7 @@ public class MessageAttachmentsController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while getting the attachment in GetMessageAttachmentByIdAsync method: {ex}");
-            return StatusCode(500, "Internal server error. Please try again later.");
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
         }
     }
 
@@ -62,7 +62,7 @@ public class MessageAttachmentsController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while saving the attachment in PostMessageAttachment method: {ex}");
-            return StatusCode(500, "Internal server error. Please try again later.");
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
         }
     }
 
@@ -85,7 +85,7 @@ public class MessageAttachmentsController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while updating the attachment in PutMessageAttachment method: {ex}");
-            return StatusCode(500, "Internal server error. Please try again later.");
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
         }
     }
 
@@ -103,7 +103,7 @@ public class MessageAttachmentsController : ControllerBase
         catch(Exception ex)
         {
             _logger.LogError($"An error occurred while deleting the attachment DeleteMessageAttachment method: {ex}");
-            return StatusCode(500, "Internal server error. Please try again later.");
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
         }
     }
 }

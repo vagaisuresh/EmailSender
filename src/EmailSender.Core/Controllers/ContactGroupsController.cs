@@ -37,7 +37,7 @@ public class ContactGroupsController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while getting contact groups in GetAllContactGroups method: {ex}");
-            return StatusCode(500, $"Internal server error. Please try again later.");
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
         }
     }
 
@@ -60,7 +60,7 @@ public class ContactGroupsController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while getting contact group in GetContactGroupById method: {ex}");
-            return StatusCode(500, $"Internal server error. Please try again.");
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
         }
     }
 
@@ -85,7 +85,7 @@ public class ContactGroupsController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while saving contact group in PostContactGroupAsync method: {ex}");
-            return StatusCode(500, $"Internal server error. Please try again later.");
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
         }
     }
 
@@ -106,7 +106,7 @@ public class ContactGroupsController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while updating contact group in PutContactGroupAsync method: {ex}");
-            return StatusCode(500, $"Internal server error. Please try again later.");
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
         }
     }
 
@@ -124,7 +124,7 @@ public class ContactGroupsController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while deleting contact group in DeleteContactGroupAsync method: {ex}");
-            return StatusCode(500, $"Internal server error. Please try again later.");
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
         }
     }
 }

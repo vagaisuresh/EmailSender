@@ -9,10 +9,12 @@ namespace EmailSender.Core.Controllers;
 public class EmailController : ControllerBase
 {
     private readonly IBulkEmailService _bulkEmailService;
+    private readonly ILoggerService _logger;
 
-    public EmailController(IBulkEmailService bulkEmailService)
+    public EmailController(IBulkEmailService bulkEmailService, ILoggerService logger)
     {
         _bulkEmailService = bulkEmailService;
+        _logger = logger;
     }
 
     [HttpPost("send-bulk")]
@@ -20,18 +22,13 @@ public class EmailController : ControllerBase
     {
         try
         {
-            // await _bulkEmailService.SendBulkEmailsAsync(bulkEmailRequest.Name, 
-            //     bulkEmailRequest.FromAddress, 
-            //     bulkEmailRequest.Recipients, 
-            //     bulkEmailRequest.Subject, 
-            //     bulkEmailRequest.HtmlBody);
-            
             await _bulkEmailService.SendBulkEmailsAsync(bulkEmailRequest.MessageId);
             return Ok("Bulk email process started.");
         }
         catch (Exception ex)
         {
-            return StatusCode(500, $"Internal Server Error: {ex}");
+            _logger.LogError($"An error occurred while sending bulk emails in SendBulkEmailsAsync method. {ex}");
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
         }
     }
 }
