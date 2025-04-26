@@ -40,7 +40,7 @@ public class MessageRecipientsController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while getting recipient in GetMessageRecipientByIdAsync method: {ex}");
-            return StatusCode(500, "Internal server error. Please try again later.");
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
         }
     }
 
@@ -64,7 +64,7 @@ public class MessageRecipientsController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while saving recipient in PostMessageRecipientAsync method: {ex}");
-            return StatusCode(500, "Internal server error. Please try again later.");
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
         }
     }
 
@@ -87,7 +87,7 @@ public class MessageRecipientsController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while saving recipient in PostMessageRecipientAsync method: {ex}");
-            return StatusCode(500, "Internal server error. Please try again later.");
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
         }
     }
 
@@ -105,7 +105,7 @@ public class MessageRecipientsController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while saving recipient in PostMessageRecipientAsync method: {ex}");
-            return StatusCode(500, "Internal server error. Please try again later.");
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
         }
     }
 }

@@ -37,7 +37,7 @@ public class ContactsController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while getting contacts in GetAllAsync method: {ex}");
-            return StatusCode(500, $"Internal server error. Please try again later.");
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
         }
     }
 
@@ -57,7 +57,7 @@ public class ContactsController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while getting contact in GetByIdAsync method: {ex}");
-            return StatusCode(500, $"Internal server error. Please try again later.");
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
         }
     }
 
@@ -82,7 +82,7 @@ public class ContactsController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while saving contact in PostAsync method: {ex}");
-            return StatusCode(500, $"Internal server error. Please try again later.");
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
         }
     }
 
@@ -121,7 +121,7 @@ public class ContactsController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while deleting contact in DeleteAsync method: {ex}");
-            return StatusCode(500, $"Internal server error. Please try again later.");
+            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
         }
     }
 }
