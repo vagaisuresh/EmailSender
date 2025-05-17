@@ -19,6 +19,13 @@ public class AccountRepository : RepositoryBase, IAccountRepository
             .ToListAsync();
     }
 
+    public async Task<EmailAccount?> GetEmailAccountAsync(short id)
+    {
+        return await _context.EmailAccounts
+            .AsNoTracking()
+            .FirstOrDefaultAsync(a => a.Id == id);
+    }
+
     public async Task<EmailAccount?> GetEmailAccountByIdAsync(short id)
     {
         return await _context.EmailAccounts.FindAsync(id);

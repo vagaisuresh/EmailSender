@@ -19,7 +19,7 @@ public class MessageService : IMessageService
     {
         try
         {
-            return await _unitOfWork.MessageRepository.GetAllMessagesAsync();
+            return await _unitOfWork.MessageRepository.GetMessagesAsync();
         }
         catch (Exception ex)
         {
@@ -32,7 +32,7 @@ public class MessageService : IMessageService
     {
         try
         {
-            return await _unitOfWork.MessageRepository.GetMessageByIdWithDetailsAsync(messageId);
+            return await _unitOfWork.MessageRepository.GetMessageAsync(messageId);
         }
         catch (Exception ex)
         {

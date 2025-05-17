@@ -17,7 +17,7 @@ public class BulkEmailService : IBulkEmailService
 
     public async Task SendBulkEmailsAsync(int messageId) //string name, string from, List<string> recipients, string subject, string htmlBody)
     {
-        var message = await _unitOfWork.MessageRepository.GetMessageByIdWithDetailsAsync(messageId);
+        var message = await _unitOfWork.MessageRepository.GetMessageAsync(messageId);
 
         if (message == null)
             throw new InvalidOperationException("Message not found.");

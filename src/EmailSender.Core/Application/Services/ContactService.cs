@@ -28,11 +28,11 @@ public class ContactService : IContactService
         }
     }
 
-    public async Task<ContactMaster?> GetContactByIdAsync(int id)
+    public async Task<ContactMaster?> GetContactAsync(int id)
     {
         try
         {
-            return await _unitOfWork.ContactRepository.GetContactByIdAsync(id);
+            return await _unitOfWork.ContactRepository.GetContactAsync(id);
         }
         catch (Exception ex)
         {

@@ -50,7 +50,7 @@ public class AccountsController : ControllerBase
 
         try
         {
-            var emailAccount = await _service.GetEmailAccountByIdAsync(id);
+            var emailAccount = await _service.GetEmailAccountAsync(id);
 
             if (emailAccount == null)
                 return NotFound();

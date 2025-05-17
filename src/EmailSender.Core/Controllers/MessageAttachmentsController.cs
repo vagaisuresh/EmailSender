@@ -21,33 +21,12 @@ public class MessageAttachmentsController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet("{id}", Name = "GetMessageAttachment")]
-    public async Task<IActionResult> GetMessageAttachmentByIdAsync(int id)
-    {
-        try
-        {
-            var attachment = await _service.GetAttachmentByIdAsync(id);
-
-            if (attachment == null)
-                return NoContent();
-
-            var attachmentDto = _mapper.Map<MessageAttachment, MessageAttachmentDto>(attachment);
-
-            return Ok(attachmentDto);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"An error occurred while getting the attachment in GetMessageAttachmentByIdAsync method: {ex}");
-            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
-        }
-    }
-
     [HttpPost]
     public async Task<IActionResult> PostMessageAttachment([FromBody] MessageAttachmentSaveDto messageAttachmentSaveDto)
     {
         if (!ModelState.IsValid)
             return BadRequest("Invalid model received.");
-        
+
         try
         {
             var messageAttachment = _mapper.Map<MessageAttachmentSaveDto, MessageAttachment>(messageAttachmentSaveDto);
@@ -55,36 +34,13 @@ public class MessageAttachmentsController : ControllerBase
 
             if (savedAttachment == null)
                 return NotFound();
-            
+
             var attachmentDto = _mapper.Map<MessageAttachment, MessageAttachmentDto>(savedAttachment);
-            return CreatedAtRoute("GetMessageAttachment", new { id = attachmentDto.Id }, attachmentDto);
+            return Ok(attachmentDto);
         }
         catch (Exception ex)
         {
             _logger.LogError($"An error occurred while saving the attachment in PostMessageAttachment method: {ex}");
-            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
-        }
-    }
-
-    [HttpPut("{id}")]
-    public async Task<IActionResult> PutMessageAttachment([FromRoute] int id, [FromBody] MessageAttachmentSaveDto messageAttachmentSaveDto)
-    {
-        if (id == 0)
-            return BadRequest("Invalid ID received.");
-        
-        if (!ModelState.IsValid)
-            return BadRequest("Invalid model received.");
-        
-        try
-        {
-            var messageAttachment = _mapper.Map<MessageAttachmentSaveDto, MessageAttachment>(messageAttachmentSaveDto);
-            await _service.UpdateAttachmentAsync(id, messageAttachment);
-
-            return NoContent();
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"An error occurred while updating the attachment in PutMessageAttachment method: {ex}");
             return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
         }
     }

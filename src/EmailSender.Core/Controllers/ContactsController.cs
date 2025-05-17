@@ -42,11 +42,11 @@ public class ContactsController : ControllerBase
     }
 
     [HttpGet("{id}", Name = "GetContact")]
-    public async Task<IActionResult> GetByIdAsync(int id)
+    public async Task<IActionResult> GetContactAsync(int id)
     {
         try
         {
-            var contact = await _service.GetContactByIdAsync(id);
+            var contact = await _service.GetContactAsync(id);
 
             if (contact == null)
                 return NotFound();
