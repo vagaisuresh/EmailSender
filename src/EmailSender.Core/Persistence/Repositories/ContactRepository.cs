@@ -20,6 +20,14 @@ public class ContactRepository : RepositoryBase, IContactRepository
             .ToListAsync();
     }
 
+    public async Task<ContactMaster?> GetContactAsync(int id)
+    {
+        return await _context.ContactMasters
+            .Include(x => x.ContactGroupMaster)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(a => a.Id == id);
+    }
+
     public async Task<ContactMaster?> GetContactByIdAsync(int id)
     {
         return await _context.ContactMasters.FindAsync(id);

@@ -21,35 +21,12 @@ public class MessageRecipientsController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet("{id}", Name = "GetMessageRecipient")]
-    public async Task<IActionResult> GetMessageRecipientByIdAsync(int id)
-    {
-        if (id == 0)
-            return BadRequest("Invalid ID provided.");
-        
-        try
-        {
-            var recipient = await _service.GetMessageRecipientByIdAsync(id);
-
-            if (recipient == null)
-                return NoContent();
-
-            var recipientDto = _mapper.Map<MessageRecipient, MessageRecipientDto>(recipient);
-            return Ok(recipientDto);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"An error occurred while getting recipient in GetMessageRecipientByIdAsync method: {ex}");
-            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
-        }
-    }
-
     [HttpPost]
     public async Task<IActionResult> PostMessageRecipientAsync([FromBody] MessageRecipientSaveDto messageRecipientSaveDto)
     {
         if (!ModelState.IsValid)
             return BadRequest("Invalid model received.");
-        
+
         try
         {
             var recipient = _mapper.Map<MessageRecipientSaveDto, MessageRecipient>(messageRecipientSaveDto);
@@ -57,9 +34,9 @@ public class MessageRecipientsController : ControllerBase
 
             if (savedRecipient == null)
                 return NotFound();
-            
+
             var recipientDto = _mapper.Map<MessageRecipient, MessageRecipientDto>(savedRecipient);
-            return CreatedAtRoute("GetMessageRecipient", new { id = recipientDto.Id }, recipientDto);
+            return Ok(recipientDto);
         }
         catch (Exception ex)
         {
@@ -67,30 +44,7 @@ public class MessageRecipientsController : ControllerBase
             return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
         }
     }
-
-    [HttpPut("{id}")]
-    public async Task<IActionResult> PutMessageRecipientAsync(int id, [FromBody] MessageRecipientSaveDto messageRecipientSaveDto)
-    {
-        if (id == 0)
-            return BadRequest("Invalid ID provided.");
-
-        if (!ModelState.IsValid)
-            return BadRequest("Invalid model received.");
-        
-        try
-        {
-            var recipient = _mapper.Map<MessageRecipientSaveDto, MessageRecipient>(messageRecipientSaveDto);
-            await _service.UpdateMessageRecipientAsync(id, recipient);
-
-            return NoContent();
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"An error occurred while saving recipient in PostMessageRecipientAsync method: {ex}");
-            return StatusCode(500, $"Internal server error. Please try again later. {ex.Message}");
-        }
-    }
-
+    
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteMessageRecipientAsync(int id)
     {

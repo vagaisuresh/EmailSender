@@ -19,7 +19,7 @@ public class ContactGroupService : IContactGroupService
     {
         try
         {
-            return await _unitOfWork.ContactGroupRepository.GetContactGroupMastersAsync();
+            return await _unitOfWork.ContactGroupRepository.GetContactGroupsAsync();
         }
         catch (Exception ex)
         {
@@ -28,11 +28,11 @@ public class ContactGroupService : IContactGroupService
         }
     }
 
-    public async Task<ContactGroupMaster?> GetContactGroupsByIdAsync(int id)
+    public async Task<ContactGroupMaster?> GetContactGroupAsync(int id)
     {
         try
         {
-            return await _unitOfWork.ContactGroupRepository.GetContactGroupMasterByIdAsync(id);
+            return await _unitOfWork.ContactGroupRepository.GetContactGroupAsync(id);
         }
         catch (Exception ex)
         {
@@ -59,7 +59,7 @@ public class ContactGroupService : IContactGroupService
 
     public async Task UpdateContactGroupAsync(int id, ContactGroupMaster contactGroupMaster)
     {
-        var existingGroup = await _unitOfWork.ContactGroupRepository.GetContactGroupMasterByIdAsync(id);
+        var existingGroup = await _unitOfWork.ContactGroupRepository.GetContactGroupByIdAsync(id);
 
         if (existingGroup == null)
             throw new InvalidOperationException("Requested contact group not found.");
@@ -82,7 +82,7 @@ public class ContactGroupService : IContactGroupService
 
     public async Task DeleteContactGroupAsync(int id)
     {
-        var existingGroup = await _unitOfWork.ContactGroupRepository.GetContactGroupMasterByIdAsync(id);
+        var existingGroup = await _unitOfWork.ContactGroupRepository.GetContactGroupByIdAsync(id);
 
         if (existingGroup == null)
             throw new InvalidOperationException("Requested contact group not found.");

@@ -28,11 +28,11 @@ public class AccountService : IAccountService
         }
     }
 
-    public async Task<EmailAccount?> GetEmailAccountByIdAsync(short id)
+    public async Task<EmailAccount?> GetEmailAccountAsync(short id)
     {
         try
         {
-            return await _unitOfWork.AccountRepository.GetEmailAccountByIdAsync(id);
+            return await _unitOfWork.AccountRepository.GetEmailAccountAsync(id);
         }
         catch (Exception ex)
         {

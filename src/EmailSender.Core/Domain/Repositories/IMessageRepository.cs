@@ -4,9 +4,9 @@ namespace EmailSender.Core.Domain.Repositories;
 
 public interface IMessageRepository
 {
-    Task<IEnumerable<Message>> GetAllMessagesAsync();
+    Task<IEnumerable<Message>> GetMessagesAsync();
+    Task<Message?> GetMessageAsync(int id);
     Task<Message?> GetMessageByIdAsync(int id);
-    Task<Message?> GetMessageByIdWithDetailsAsync(int id);
 
     Task AddAsync(Message message);
     void Update(Message message);

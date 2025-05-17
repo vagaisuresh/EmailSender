@@ -42,14 +42,14 @@ public class ContactGroupsController : ControllerBase
     }
 
     [HttpGet("{id}", Name = "GetContactGroup")]
-    public async Task<IActionResult> GetContactGroupById(int id)
+    public async Task<IActionResult> GetContactGroupAsync(int id)
     {
         if (id == 0)
             return BadRequest("Invalid ID provided.");
 
         try
         {
-            var contactGroup = await _service.GetContactGroupsByIdAsync(id);
+            var contactGroup = await _service.GetContactGroupAsync(id);
 
             if (contactGroup == null)
                 return NotFound();

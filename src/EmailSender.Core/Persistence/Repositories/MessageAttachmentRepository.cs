@@ -10,25 +10,15 @@ public class MessageAttachmentRepository : RepositoryBase, IMessageAttachmentRep
         : base(context)
     {
     }
-    
+
     public async Task<MessageAttachment?> GetAttachmentByIdAsync(int id)
     {
         return await _context.MessageAttachments.FindAsync(id);
     }
-
+    
     public async Task AddAsync(MessageAttachment messageAttachment)
     {
         await _context.MessageAttachments.AddAsync(messageAttachment);
-    }
-
-    /* public async Task AddRangeAsync(ICollection<MessageAttachment> messageAttachments)
-    {
-        await _context.MessageAttachments.AddRangeAsync(messageAttachments);
-    } */
-
-    public void Update(MessageAttachment messageAttachment)
-    {
-        _context.Update(messageAttachment);
     }
 
     public void Remove(MessageAttachment messageAttachment)

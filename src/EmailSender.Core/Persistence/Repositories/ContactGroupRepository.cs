@@ -11,7 +11,7 @@ public class ContactGroupRepository : RepositoryBase, IContactGroupRepository
     {
     }
 
-    public async Task<IEnumerable<ContactGroupMaster>> GetContactGroupMastersAsync()
+    public async Task<IEnumerable<ContactGroupMaster>> GetContactGroupsAsync()
     {
         return await _context.ContactGroupMasters
             .Where(m => m.IsRemoved == false)
@@ -19,7 +19,14 @@ public class ContactGroupRepository : RepositoryBase, IContactGroupRepository
             .ToListAsync();
     }
 
-    public async Task<ContactGroupMaster?> GetContactGroupMasterByIdAsync(int id)
+    public async Task<ContactGroupMaster?> GetContactGroupAsync(int id)
+    {
+        return await _context.ContactGroupMasters
+            .AsNoTracking()
+            .FirstOrDefaultAsync(a => a.Id == id);
+    }
+
+    public async Task<ContactGroupMaster?> GetContactGroupByIdAsync(int id)
     {
         return await _context.ContactGroupMasters.FindAsync(id);
     }

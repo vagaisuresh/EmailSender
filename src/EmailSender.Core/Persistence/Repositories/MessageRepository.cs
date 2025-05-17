@@ -12,19 +12,14 @@ public class MessageRepository : RepositoryBase, IMessageRepository
     {
     }
 
-    public async Task<IEnumerable<Message>> GetAllMessagesAsync()
+    public async Task<IEnumerable<Message>> GetMessagesAsync()
     {
         return await _context.Messages
             .AsNoTracking()
             .ToListAsync();
     }
 
-    public async Task<Message?> GetMessageByIdAsync(int id)
-    {
-        return await _context.Messages.FindAsync(id);
-    }
-
-    public async Task<Message?> GetMessageByIdWithDetailsAsync(int id)
+    public async Task<Message?> GetMessageAsync(int id)
     {
         return await _context.Messages
             .Include(a => a.EmailAccountNavigation)
@@ -32,6 +27,11 @@ public class MessageRepository : RepositoryBase, IMessageRepository
             .Include(a => a.MessageRecipients)
             .ThenInclude(a => a.ContactMasterNavigation)
             .FirstOrDefaultAsync(i => i.Id == id);
+    }
+
+    public async Task<Message?> GetMessageByIdAsync(int id)
+    {
+        return await _context.Messages.FindAsync(id);
     }
 
     public async Task AddAsync(Message message)
